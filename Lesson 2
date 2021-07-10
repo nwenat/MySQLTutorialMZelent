@@ -1,0 +1,48 @@
+SELECT * FROM ksiazki ORDER BY tytul ASC
+
+SELECT * FROM ksiazki ORDER BY cena DESC LIMIT 1
+
+SELECT * FROM zamowienia WHERE status="wyslano"
+
+SELECT * FROM klienci WHERE nazwisko="Rutkowski"
+
+SELECT * FROM ksiazki WHERE tytul LIKE "%PHP%"
+
+SELECT * FROM zamowienia ORDER BY data DESC
+
+SELECT klienci.imie, klienci.nazwisko, zamowienia.idzamowienia, zamowienia.data FROM klienci, zamowienia WHERE klienci.idklienta = zamowienia.idklienta
+
+SELECT k.imie, k.nazwisko, z.idzamowienia, z.data FROM klienci AS k, zamowienia AS z WHERE k.idklienta = z.idklienta
+
+SELECT k.imie, k.nazwisko FROM klienci AS k, zamowienia AS z WHERE z.idksiazki=2 AND k.idklienta = z.idklienta
+
+SELECT ks.imieautora, ks.nazwiskoautora, ks.tytul FROM klienci AS k, zamowienia AS z, ksiazki AS ks WHERE k.imie="Jan" AND k.nazwisko="Nowak"
+AND k.idklienta = z.idklienta AND ks.idksiazki = z.idksiazki
+
+SELECT k.imie, k.nazwisko, z.idzamowienia, z.data, z.status, ks.tytul FROM klienci AS k, zamowienia AS z, ksiazki AS ks WHERE k.nazwisko="Rutkowski"
+AND k.idklienta = z.idklienta AND ks.idksiazki = z.idksiazki
+ORDER BY z.data DESC
+
+-------------------------------------------------------------------------------
+
+SELECT imie, nazwisko FROM klienci WHERE idklienta = 4
+
+SELECT * FROM auta WHERE rocznik = 2010
+
+SELECT * FROM auta AS a, wypozyczenia AS w, klienci AS k WHERE a.marka="Ford"
+AND a.idauta = w.idauta AND k.idklienta = w.idklienta
+/////SELECT * FROM auta AS a WHERE a.marka="Ford"
+
+SELECT * FROM auta WHERE idauta BETWEEN 2 AND 4
+
+SELECT imie, nazwisko FROM klienci WHERE miasto = "Katowice" AND adres LIKE "Rolna%"
+
+SELECT marka, model FROM auta ORDER BY ubezpieczenie DESC LIMIT 1
+
+SELECT a.idauta, a.marka, a.model FROM auta AS a, wypozyczenia AS w WHERE a.idauta=w.idauta ORDER BY w.datawyp ASC LIMIT 1
+
+SELECT k.imie, k.nazwisko FROM klienci AS k, wypozyczenia AS w WHERE w.idauta=1 AND k.idklienta=w.idklienta
+
+SELECT a.marka, a.model FROM klienci AS k, wypozyczenia AS w, auta AS a WHERE k.idklienta=4 AND k.idklienta=w.idklienta AND a.idauta=w.idauta
+
+SELECT a.marka, a.model FROM klienci AS k, wypozyczenia AS w, auta AS a WHERE k.nazwisko="Pastewniak" AND k.idklienta=w.idklienta AND a.idauta=w.idauta
