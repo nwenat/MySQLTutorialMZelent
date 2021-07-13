@@ -1,0 +1,27 @@
+SELECT Continent, COUNT(Code) AS IlePanstw FROM country
+GROUP BY Continent ORDER BY IlePanstw DESC
+
+
+SELECT l.Language, COUNT(l.CountryCode) AS IlePanstw FROM countrylanguage AS l, country AS c WHERE l.CountryCode=c.Code AND IsOfficial=TRUE AND c.Continent="Europe" GROUP BY Language ORDER BY IlePanstw DESC
+
+
+SELECT c.Name, SUM(ci.Population) AS SumaObywateli
+FROM country AS C, city AS ci
+WHERE ci.CountryCode = c.Code AND c.Region="South America" AND ci.Population>=100000
+GROUP BY c.Name ORDER BY SumaObywateli DESC
+
+SELECT g.nazwa_zwyczajowa, SUM(o.liczebnosc) AS IlePtakow
+FROM gatunki AS g, obserwacje AS o
+WHERE o.ID_gatunku=g.ID_gatunku
+GROUP BY g.nazwa_zwyczajowa ORDER BY IlePtakow DESC
+
+SELECT g.nazwa_zwyczajowa, COUNT(o.ID_lokalizacji) AS IleObserwacji
+FROM gatunki AS g, lokalizacje AS l, obserwacje AS o
+WHERE l.ID_lokalizacji=o.ID_lokalizacji AND o.ID_gatunku=g.ID_gatunku AND l.powiat="gdanski"
+GROUP BY g.nazwa_zwyczajowa ORDER BY IleObserwacji DESC
+LIMIT 10
+
+SELECT l.powiat, SUM(o.liczebnosc) AS IlePtakow
+FROM gatunki AS g, lokalizacje AS l, obserwacje AS o
+WHERE l.ID_lokalizacji=o.ID_lokalizacji AND o.ID_gatunku=g.ID_gatunku AND g.nazwa_zwyczajowa LIKE "dzieciol%" AND l.opis LIKE "%las%" AND o.zachowanie LIKE "%zeruje%"
+GROUP BY l.powiat ORDER BY IlePtakow
